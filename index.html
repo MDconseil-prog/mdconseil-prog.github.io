@@ -1,12 +1,488 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>MD Conseil</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MD Conseil - Développement d'applications mobiles et conseil en systèmes d'information. Éditeur de RandoSpot, l'application communautaire de randonnée.">
+  <title>MD Conseil - Développement d'applications mobiles</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      color: #333;
+      background: #fff;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      padding: 0 24px;
+    }
+    nav .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+    nav .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-decoration: none;
+    }
+    nav .logo span { color: #2d6a4f; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #555;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover { color: #2d6a4f; }
+
+    /* Hero */
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0f9ff 100%);
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 span { color: #2d6a4f; }
+    .hero p {
+      font-size: 20px;
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: #2d6a4f;
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    section h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+    }
+    section h2 span { color: #2d6a4f; }
+    section .subtitle {
+      font-size: 17px;
+      color: #666;
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    /* About */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .about-content .text p {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 16px;
+    }
+    .about-card {
+      background: #f9fafb;
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid #e5e7eb;
+    }
+    .about-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2d6a4f;
+      margin-bottom: 16px;
+    }
+    .about-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .about-card ul li {
+      padding: 8px 0;
+      font-size: 15px;
+      color: #444;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .about-card ul li:last-child { border-bottom: none; }
+
+    /* App section */
+    .app-section {
+      background: #f9fafb;
+      padding: 80px 24px;
+      max-width: 100%;
+    }
+    .app-section .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .app-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .app-header h2 { margin-bottom: 8px; }
+    .app-header .subtitle {
+      margin: 0 auto 0;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 24px;
+      border: 1px solid #e5e7eb;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: #d8f3dc;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Store links */
+    .store-links {
+      text-align: center;
+      margin-top: 48px;
+    }
+    .store-links p {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 16px;
+    }
+    .store-badges {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .store-badge:hover { background: #333; }
+    .store-badge .store-name { font-size: 16px; }
+
+    /* Legal */
+    .legal-section {
+      text-align: center;
+      border-top: 1px solid #e5e7eb;
+    }
+    .legal-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .legal-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 28px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #2d6a4f;
+      font-weight: 600;
+      font-size: 15px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .legal-link:hover {
+      background: #f0fdf4;
+      border-color: #2d6a4f;
+    }
+
+    /* Contact */
+    .contact-section {
+      background: #f9fafb;
+      padding: 80px 24px;
+      max-width: 100%;
+    }
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contact-inner h2 { margin-bottom: 12px; }
+    .contact-inner .subtitle { margin: 0 auto 32px; }
+    .contact-info {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid #e5e7eb;
+    }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 0;
+      font-size: 16px;
+      color: #444;
+    }
+    .contact-row:not(:last-child) {
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .contact-row a {
+      color: #2d6a4f;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .contact-row a:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      background: #1a1a1a;
+      color: #999;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    footer .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    footer p { font-size: 14px; margin-bottom: 8px; }
+    footer a { color: #aaa; text-decoration: none; }
+    footer a:hover { color: #fff; }
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 17px; }
+      .about-content { grid-template-columns: 1fr; gap: 32px; }
+      .features-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 20px; }
+      .legal-links { flex-direction: column; align-items: center; }
+    }
+  </style>
 </head>
 <body>
-<h1>MD Conseil</h1>
-<p>Développement d'applications mobiles et conseil en systèmes d'information.</p>
-<p>Contact : maxencedelecourtconseil@gmail.com</p>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">MD <span>Conseil</span></a>
+      <ul>
+        <li><a href="#about">L'entreprise</a></li>
+        <li><a href="#app">RandoSpot</a></li>
+        <li><a href="#legal">Mentions l&eacute;gales</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="badge">Entreprise de services num&eacute;riques</div>
+    <h1 style="margin-top: 24px;">MD <span>Conseil</span></h1>
+    <p>D&eacute;veloppement d'applications mobiles et conseil en syst&egrave;mes d'information.</p>
+  </div>
+
+  <!-- About -->
+  <section id="about">
+    <h2>&Agrave; propos de <span>MD Conseil</span></h2>
+    <p class="subtitle">Une entreprise sp&eacute;cialis&eacute;e dans le d&eacute;veloppement d'applications mobiles innovantes.</p>
+    <div class="about-content">
+      <div class="text">
+        <p>MD Conseil est une entreprise fran&ccedil;aise sp&eacute;cialis&eacute;e dans le d&eacute;veloppement d'applications mobiles et le conseil en syst&egrave;mes d'information.</p>
+        <p>Nous concevons des solutions mobiles modernes, performantes et centr&eacute;es sur l'exp&eacute;rience utilisateur. Notre expertise couvre l'ensemble du cycle de d&eacute;veloppement, de la conception &agrave; la mise en production sur les stores Apple et Google.</p>
+        <p>Notre premi&egrave;re application, <strong>RandoSpot</strong>, est une plateforme communautaire d&eacute;di&eacute;e aux passionn&eacute;s de randonn&eacute;e, disponible sur iOS et Android.</p>
+      </div>
+      <div class="about-card">
+        <h3>Nos comp&eacute;tences</h3>
+        <ul>
+          <li>D&eacute;veloppement mobile iOS &amp; Android</li>
+          <li>Applications React Native / Expo</li>
+          <li>Architecture cloud &amp; bases de donn&eacute;es</li>
+          <li>Int&eacute;gration de cartographie &amp; g&eacute;olocalisation</li>
+          <li>Conseil en syst&egrave;mes d'information</li>
+          <li>UI/UX Design &amp; exp&eacute;rience utilisateur</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- App RandoSpot -->
+  <div class="app-section" id="app">
+    <div class="inner">
+      <div class="app-header">
+        <h2>Rando<span>Spot</span></h2>
+        <p class="subtitle">L'application communautaire pour les passionn&eacute;s de randonn&eacute;e. D&eacute;couvrez, partagez et explorez ensemble.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F5FA;</div>
+          <h3>Carte interactive</h3>
+          <p>Explorez les sentiers et &eacute;v&eacute;nements de randonn&eacute;e autour de vous gr&acirc;ce &agrave; une carte interactive avec g&eacute;olocalisation.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F4C5;</div>
+          <h3>&Eacute;v&eacute;nements</h3>
+          <p>Cr&eacute;ez et rejoignez des &eacute;v&eacute;nements de randonn&eacute;e pr&egrave;s de chez vous. Organisez des sorties en groupe facilement.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F6B6;</div>
+          <h3>Sentiers</h3>
+          <p>D&eacute;couvrez des sentiers de randonn&eacute;e avec toutes les informations : distance, d&eacute;nivel&eacute;, difficult&eacute; et avis.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F4AC;</div>
+          <h3>Communaut&eacute;</h3>
+          <p>Partagez vos exp&eacute;riences, laissez des avis et &eacute;changez avec d'autres randonneurs passionn&eacute;s.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F4F7;</div>
+          <h3>Photos</h3>
+          <p>Partagez vos plus belles photos de randonn&eacute;e et d&eacute;couvrez les paysages partag&eacute;s par la communaut&eacute;.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F3C5;</div>
+          <h3>Badges</h3>
+          <p>Gagnez des badges en participant &agrave; des &eacute;v&eacute;nements, en explorant des sentiers et en contribuant &agrave; la communaut&eacute;.</p>
+        </div>
+      </div>
+
+      <div class="store-links">
+        <p>T&eacute;l&eacute;chargez RandoSpot gratuitement :</p>
+        <div class="store-badges">
+          <a href="https://play.google.com/store/apps/details?id=com.mdconseil.randospot" class="store-badge" target="_blank" rel="noopener">
+            &#9654;&nbsp; Google Play
+          </a>
+          <span class="store-badge" style="background:#555; cursor:default;">
+            &#63743;&nbsp; App Store (bient&ocirc;t)
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal -->
+  <section id="legal" class="legal-section">
+    <h2>Mentions <span>l&eacute;gales</span></h2>
+    <p class="subtitle">Consultez nos documents juridiques et notre politique de confidentialit&eacute;.</p>
+    <div class="legal-links">
+      <a href="https://mdconseil-prog.github.io/randospot-legal/legal.html" class="legal-link" target="_blank" rel="noopener">
+        &#x1F4C4;&nbsp; Politique de confidentialit&eacute; &amp; CGU
+      </a>
+      <a href="https://mdconseil-prog.github.io/randospot-legal/delete-account.html" class="legal-link" target="_blank" rel="noopener">
+        &#x1F5D1;&nbsp; Suppression de compte
+      </a>
+    </div>
+
+    <div style="max-width:700px; margin:48px auto 0; text-align:left; background:#f9fafb; border-radius:12px; padding:24px 28px; border:1px solid #e5e7eb;">
+      <h3 style="font-size:17px; color:#1a1a1a; margin-bottom:12px;">Informations l&eacute;gales</h3>
+      <p style="font-size:14px; color:#555; margin-bottom:6px;"><strong>&Eacute;diteur :</strong> MD Conseil</p>
+      <p style="font-size:14px; color:#555; margin-bottom:6px;"><strong>Activit&eacute; :</strong> D&eacute;veloppement d'applications mobiles et conseil en syst&egrave;mes d'information</p>
+      <p style="font-size:14px; color:#555; margin-bottom:6px;"><strong>Contact :</strong> <a href="mailto:contact@mdconseil59.fr" style="color:#2d6a4f;">contact@mdconseil59.fr</a></p>
+      <p style="font-size:14px; color:#555; margin-bottom:6px;"><strong>H&eacute;bergement :</strong> GitHub Pages (GitHub, Inc. - San Francisco, CA, USA)</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <div class="contact-section" id="contact">
+    <div class="contact-inner">
+      <h2>Nous <span>contacter</span></h2>
+      <p class="subtitle">Une question, un projet ou un partenariat ? N'h&eacute;sitez pas &agrave; nous &eacute;crire.</p>
+      <div class="contact-info">
+        <div class="contact-row">
+          &#x2709;&nbsp;&nbsp;<a href="mailto:contact@mdconseil59.fr">contact@mdconseil59.fr</a>
+        </div>
+        <div class="contact-row">
+          &#x1F310;&nbsp;&nbsp;<span>France</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <p>&copy; 2026 MD Conseil. Tous droits r&eacute;serv&eacute;s.</p>
+      <div class="footer-links">
+        <a href="#about">L'entreprise</a>
+        <a href="#app">RandoSpot</a>
+        <a href="https://mdconseil-prog.github.io/randospot-legal/legal.html" target="_blank" rel="noopener">Confidentialit&eacute;</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
