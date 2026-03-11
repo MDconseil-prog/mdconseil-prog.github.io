@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="MD Conseil - Développement d'applications mobiles et conseil en systèmes d'information. Éditeur de RandoSpot, l'application communautaire de randonnée.">
-  <title>MD Conseil - Développement d'applications mobiles</title>
+  <meta name="description" content="MD Conseil - D&eacute;veloppement d'applications mobiles et conseil en syst&egrave;mes d'information. &Eacute;diteur de RandoSpot et TeamBloc.">
+  <title>MD Conseil - D&eacute;veloppement d'applications mobiles</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -99,6 +99,7 @@
       margin-bottom: 12px;
     }
     section h2 span { color: #2d6a4f; }
+    section h2 .accent-blue { color: #2563eb; }
     section .subtitle {
       font-size: 17px;
       color: #666;
@@ -142,9 +143,63 @@
     }
     .about-card ul li:last-child { border-bottom: none; }
 
-    /* App section */
-    .app-section {
+    /* Apps overview */
+    .apps-overview {
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .apps-overview .subtitle {
+      margin: 0 auto 48px;
+    }
+    .apps-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .app-overview-card {
       background: #f9fafb;
+      border-radius: 16px;
+      padding: 32px 24px;
+      border: 1px solid #e5e7eb;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+    .app-overview-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+    }
+    .app-overview-card .app-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 16px;
+    }
+    .app-overview-card .app-icon.green { background: #d8f3dc; }
+    .app-overview-card .app-icon.blue { background: #dbeafe; }
+    .app-overview-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .app-overview-card p { font-size: 14px; color: #666; }
+    .app-overview-card .status {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .status-live { background: #d1fae5; color: #065f46; }
+    .status-beta { background: #dbeafe; color: #1e40af; }
+
+    /* App section - RandoSpot */
+    .app-section {
       padding: 80px 24px;
       max-width: 100%;
     }
@@ -152,6 +207,8 @@
       max-width: 1100px;
       margin: 0 auto;
     }
+    .app-section-green { background: #f0fdf4; }
+    .app-section-blue { background: #eff6ff; }
     .app-header {
       text-align: center;
       margin-bottom: 48px;
@@ -160,6 +217,17 @@
     .app-header .subtitle {
       margin: 0 auto 0;
     }
+    .app-header .app-tag {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .tag-green { background: #d8f3dc; color: #1b4332; }
+    .tag-blue { background: #dbeafe; color: #1e3a5f; }
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -179,7 +247,6 @@
     .feature-icon {
       width: 48px;
       height: 48px;
-      background: #d8f3dc;
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -187,6 +254,8 @@
       font-size: 24px;
       margin-bottom: 16px;
     }
+    .icon-green { background: #d8f3dc; }
+    .icon-blue { background: #dbeafe; }
     .feature-card h3 {
       font-size: 17px;
       font-weight: 700;
@@ -229,7 +298,11 @@
       transition: background 0.2s;
     }
     .store-badge:hover { background: #333; }
-    .store-badge .store-name { font-size: 16px; }
+    .store-badge-disabled {
+      background: #555;
+      cursor: default;
+    }
+    .store-badge-disabled:hover { background: #555; }
 
     /* Legal */
     .legal-section {
@@ -326,6 +399,7 @@
       .hero h1 { font-size: 32px; }
       .hero p { font-size: 17px; }
       .about-content { grid-template-columns: 1fr; gap: 32px; }
+      .apps-cards { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
       section { padding: 60px 20px; }
       .legal-links { flex-direction: column; align-items: center; }
@@ -340,7 +414,7 @@
       <a href="#" class="logo">MD <span>Conseil</span></a>
       <ul>
         <li><a href="#about">L'entreprise</a></li>
-        <li><a href="#app">RandoSpot</a></li>
+        <li><a href="#apps">Nos applications</a></li>
         <li><a href="#legal">Mentions l&eacute;gales</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -362,7 +436,7 @@
       <div class="text">
         <p>MD Conseil est une entreprise fran&ccedil;aise sp&eacute;cialis&eacute;e dans le d&eacute;veloppement d'applications mobiles et le conseil en syst&egrave;mes d'information.</p>
         <p>Nous concevons des solutions mobiles modernes, performantes et centr&eacute;es sur l'exp&eacute;rience utilisateur. Notre expertise couvre l'ensemble du cycle de d&eacute;veloppement, de la conception &agrave; la mise en production sur les stores Apple et Google.</p>
-        <p>Notre premi&egrave;re application, <strong>RandoSpot</strong>, est une plateforme communautaire d&eacute;di&eacute;e aux passionn&eacute;s de randonn&eacute;e, disponible sur iOS et Android.</p>
+        <p>Nous &eacute;ditons actuellement deux applications : <strong>RandoSpot</strong>, une plateforme communautaire de randonn&eacute;e, et <strong>TeamBloc</strong>, une solution de gestion d'&eacute;quipes sportives.</p>
       </div>
       <div class="about-card">
         <h3>Nos comp&eacute;tences</h3>
@@ -378,42 +452,63 @@
     </div>
   </section>
 
-  <!-- App RandoSpot -->
-  <div class="app-section" id="app">
+  <!-- Nos applications -->
+  <section id="apps" class="apps-overview">
+    <h2>Nos <span>applications</span></h2>
+    <p class="subtitle">Des applications mobiles pens&eacute;es pour rassembler les passionn&eacute;s de sport et de plein air.</p>
+    <div class="apps-cards">
+      <a href="#randospot" class="app-overview-card">
+        <div class="app-icon green">&#x1F6B6;</div>
+        <h3>RandoSpot</h3>
+        <p>La communaut&eacute; des randonneurs. D&eacute;couvrez des sentiers, organisez des sorties et partagez vos exp&eacute;riences.</p>
+        <span class="status status-live">Disponible sur Google Play</span>
+      </a>
+      <a href="#teambloc" class="app-overview-card">
+        <div class="app-icon blue">&#x26BD;</div>
+        <h3>TeamBloc</h3>
+        <p>La gestion d'&eacute;quipes sportives simplifi&eacute;e. Entra&icirc;nements, matchs, convocations et tournois.</p>
+        <span class="status status-beta">En phase de test</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- RandoSpot -->
+  <div class="app-section app-section-green" id="randospot">
     <div class="inner">
       <div class="app-header">
+        <span class="app-tag tag-green">&#x1F6B6; Randonn&eacute;e</span>
         <h2>Rando<span>Spot</span></h2>
         <p class="subtitle">L'application communautaire pour les passionn&eacute;s de randonn&eacute;e. D&eacute;couvrez, partagez et explorez ensemble.</p>
       </div>
 
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">&#x1F5FA;</div>
+          <div class="feature-icon icon-green">&#x1F5FA;</div>
           <h3>Carte interactive</h3>
           <p>Explorez les sentiers et &eacute;v&eacute;nements de randonn&eacute;e autour de vous gr&acirc;ce &agrave; une carte interactive avec g&eacute;olocalisation.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">&#x1F4C5;</div>
+          <div class="feature-icon icon-green">&#x1F4C5;</div>
           <h3>&Eacute;v&eacute;nements</h3>
           <p>Cr&eacute;ez et rejoignez des &eacute;v&eacute;nements de randonn&eacute;e pr&egrave;s de chez vous. Organisez des sorties en groupe facilement.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">&#x1F6B6;</div>
+          <div class="feature-icon icon-green">&#x1F6B6;</div>
           <h3>Sentiers</h3>
           <p>D&eacute;couvrez des sentiers de randonn&eacute;e avec toutes les informations : distance, d&eacute;nivel&eacute;, difficult&eacute; et avis.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">&#x1F4AC;</div>
+          <div class="feature-icon icon-green">&#x1F4AC;</div>
           <h3>Communaut&eacute;</h3>
           <p>Partagez vos exp&eacute;riences, laissez des avis et &eacute;changez avec d'autres randonneurs passionn&eacute;s.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">&#x1F4F7;</div>
+          <div class="feature-icon icon-green">&#x1F4F7;</div>
           <h3>Photos</h3>
           <p>Partagez vos plus belles photos de randonn&eacute;e et d&eacute;couvrez les paysages partag&eacute;s par la communaut&eacute;.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">&#x1F3C5;</div>
+          <div class="feature-icon icon-green">&#x1F3C5;</div>
           <h3>Badges</h3>
           <p>Gagnez des badges en participant &agrave; des &eacute;v&eacute;nements, en explorant des sentiers et en contribuant &agrave; la communaut&eacute;.</p>
         </div>
@@ -425,7 +520,63 @@
           <a href="https://play.google.com/store/apps/details?id=com.mdconseil.randospot" class="store-badge" target="_blank" rel="noopener">
             &#9654;&nbsp; Google Play
           </a>
-          <span class="store-badge" style="background:#555; cursor:default;">
+          <span class="store-badge store-badge-disabled">
+            &#63743;&nbsp; App Store (bient&ocirc;t)
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TeamBloc -->
+  <div class="app-section app-section-blue" id="teambloc">
+    <div class="inner">
+      <div class="app-header">
+        <span class="app-tag tag-blue">&#x26BD; Sport collectif</span>
+        <h2>Team<span class="accent-blue">Bloc</span></h2>
+        <p class="subtitle">La gestion d'&eacute;quipes sportives simplifi&eacute;e. Id&eacute;al pour les coachs, dirigeants et parents de jeunes sportifs.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">&#x1F465;</div>
+          <h3>Gestion d'&eacute;quipes</h3>
+          <p>Cr&eacute;ez et g&eacute;rez vos &eacute;quipes par cat&eacute;gorie d'&acirc;ge. G&eacute;rez les joueurs, coachs et parents depuis une seule interface.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">&#x1F4CB;</div>
+          <h3>Convocations</h3>
+          <p>Envoyez des convocations pour les entra&icirc;nements et les matchs. Suivez les pr&eacute;sences et absences en temps r&eacute;el.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">&#x1F4C5;</div>
+          <h3>Calendrier</h3>
+          <p>Planifiez entra&icirc;nements, matchs et tournois. Vue calendrier compl&egrave;te pour tout le club.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">&#x1F3C6;</div>
+          <h3>Tournois</h3>
+          <p>Organisez des tournois complets : phases de poules, matchs &agrave; &eacute;limination directe, classements en direct.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">&#x1F697;</div>
+          <h3>Covoiturage</h3>
+          <p>Coordonnez les d&eacute;placements entre parents. Proposez ou r&eacute;servez des places pour les trajets vers les matchs.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">&#x1F4CA;</div>
+          <h3>Pronostics</h3>
+          <p>Faites vos pronostics sur les matchs professionnels entre membres du club. Classements et badges &agrave; la cl&eacute;.</p>
+        </div>
+      </div>
+
+      <div class="store-links">
+        <p>TeamBloc arrive bient&ocirc;t sur les stores :</p>
+        <div class="store-badges">
+          <span class="store-badge store-badge-disabled">
+            &#9654;&nbsp; Google Play (bient&ocirc;t)
+          </span>
+          <span class="store-badge store-badge-disabled">
             &#63743;&nbsp; App Store (bient&ocirc;t)
           </span>
         </div>
@@ -477,7 +628,8 @@
       <p>&copy; 2026 MD Conseil. Tous droits r&eacute;serv&eacute;s.</p>
       <div class="footer-links">
         <a href="#about">L'entreprise</a>
-        <a href="#app">RandoSpot</a>
+        <a href="#randospot">RandoSpot</a>
+        <a href="#teambloc">TeamBloc</a>
         <a href="https://mdconseil-prog.github.io/randospot-legal/legal.html" target="_blank" rel="noopener">Confidentialit&eacute;</a>
         <a href="#contact">Contact</a>
       </div>
