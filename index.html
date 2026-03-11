@@ -35,12 +35,22 @@
       height: 64px;
     }
     nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    nav .logo img {
+      height: 40px;
+      width: auto;
+      border-radius: 8px;
+    }
+    nav .logo-text {
       font-size: 20px;
       font-weight: 700;
       color: #1a1a1a;
-      text-decoration: none;
     }
-    nav .logo span { color: #2d6a4f; }
+    nav .logo-text span { color: #2d6a4f; }
     nav ul {
       list-style: none;
       display: flex;
@@ -411,7 +421,10 @@
   <!-- Navigation -->
   <nav>
     <div class="nav-inner">
-      <a href="#" class="logo">MD <span>Conseil</span></a>
+      <a href="#" class="logo">
+        <img src="logo.jpeg" alt="MD Conseil">
+        <span class="logo-text">MD <span>Conseil</span></span>
+      </a>
       <ul>
         <li><a href="#about">L'entreprise</a></li>
         <li><a href="#apps">Nos applications</a></li>
@@ -423,6 +436,7 @@
 
   <!-- Hero -->
   <div class="hero">
+    <img src="logo.jpeg" alt="MD Conseil" style="width:120px; height:120px; border-radius:24px; margin-bottom:24px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);">
     <div class="badge">Entreprise de services num&eacute;riques</div>
     <h1 style="margin-top: 24px;">MD <span>Conseil</span></h1>
     <p>D&eacute;veloppement d'applications mobiles et conseil en syst&egrave;mes d'information.</p>
